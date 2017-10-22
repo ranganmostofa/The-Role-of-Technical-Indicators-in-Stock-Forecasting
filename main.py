@@ -22,11 +22,12 @@ SIGNAL = 9
 
 INVENTORY_VALUATION_METHOD = IVM.FIFO
 
-field1 = "SPY.Open"
-field2 = "SPY.Close"
+# field1 = "SPY.Open"
+# field2 = "SPY.Close"
+field3 = "SPY.Adjusted"
 data_matrix = FileIO.read_csv(CSV_FILENAME)
 
-prices = [float(price) for price in DataProcessing.extract_prices(data_matrix, field1, field2)]
+prices = [float(price) for price in DataProcessing.extract_prices(data_matrix, field3)]
 
 s = TechnicalIndicators.MACD.compute_aggregate_signals(prices, LONG, SHORT, SIGNAL)
 
@@ -34,9 +35,14 @@ print(s)
 
 bt = BackTester()
 
-print(bt.backtest(prices[len(prices) - len(s):], s, INVENTORY_VALUATION_METHOD))
+investment, position, realized_pnl, unrealized_pnl, pnl = \
+    bt.backtest(prices[len(prices) - len(s):], s, INVENTORY_VALUATION_METHOD)
+
+print(investment)
+print(realized_pnl, unrealized_pnl, pnl)
+print(pnl / investment * 100, "\n")
 
 t1 = time()
 
-print(str(t1 - t0))
+print("Time Taken:", str(t1 - t0), "s")
 
