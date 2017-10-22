@@ -24,7 +24,7 @@ class WeightFunctions:
         :return:
         """
         if len(args) > 1:
-            return [1 for arg in args]
+            return [1 for _ in args]
         return [*args].pop()
 
     @staticmethod

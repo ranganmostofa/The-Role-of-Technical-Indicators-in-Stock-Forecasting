@@ -89,10 +89,11 @@ class TechnicalIndicators:
             print(signal_ma)
             print(macd)
 
-            return zip(TechnicalIndicators.MACD.determine_crossover_signal(macd, signal_ma),
-                       TechnicalIndicators.MACD.determine_divergence_signal(prices[long - 1:], macd),
-                       TechnicalIndicators.MACD.determine_dramatic_rise_signal(long_ma, short_ma),
-                       TechnicalIndicators.MACD.determine_centerline_signal(macd))
+            return zip(
+                # TechnicalIndicators.MACD.determine_crossover_signal(macd, signal_ma),
+                # TechnicalIndicators.MACD.determine_divergence_signal(prices[long - 1:], macd),
+                # TechnicalIndicators.MACD.determine_dramatic_rise_signal(long_ma, short_ma),
+                TechnicalIndicators.MACD.determine_centerline_signal(macd))
 
         @staticmethod
         def determine_crossover_signal(macd, signal_ma):
@@ -148,7 +149,6 @@ class TechnicalIndicators:
             :param prices:
             :param long:
             :param short:
-            :param signal:
             :return:
             """
             if len(prices):
